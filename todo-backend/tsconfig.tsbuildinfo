@@ -1,0 +1,13 @@
+{
+  "root": [
+    "./src/index.ts",
+    "./src/controllers/todocontroller/deletetodo.ts",
+    "./src/controllers/todocontroller/inserttodo.ts",
+    "./src/controllers/todocontroller/updatetodo.ts",
+    "./src/controllers/usercontroller/getallusers.ts",
+    "./src/controllers/usercontroller/getcurrentuser.ts",
+    "./src/controllers/usercontroller/userlogin.ts",
+    "./src/controllers/usercontroller/userregistration.ts"
+  ],
+  "version": "5.6.3"
+}

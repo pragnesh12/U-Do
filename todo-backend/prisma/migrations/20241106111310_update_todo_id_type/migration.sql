@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Todo" ALTER COLUMN "id" DROP DEFAULT;
+DROP SEQUENCE "Todo_id_seq";
