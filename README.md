@@ -61,12 +61,12 @@ You can check out a live demo [here](#) (add your link) or follow the setup inst
 
 ## Run the Project:
 
-## For Frontend
+# For Frontend
 
 1. cd todo-frontend
 2. npm run start
 
-## For Backend
+# For Backend
 
 1. cd todo-backend
 2. npm start
