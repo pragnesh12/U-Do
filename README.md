@@ -40,10 +40,10 @@ You can check out a live demo [here](#) (add your link) or follow the setup inst
 ## Installation
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/pragnesh12/U-Do.git
-   cd U-Do
-
+```bash
+git clone https://github.com/pragnesh12/U-Do.git
+cd U-Do
+```
 ## For Frontend
  ```bash
  cd todo-frontend
@@ -51,8 +51,8 @@ You can check out a live demo [here](#) (add your link) or follow the setup inst
 ```
 ## For Backend
 ```bash
- cd todo-backend
- npm install
+cd todo-backend
+npm install
 ```
 
 ## Environment Variables: Create a .env file in the todo-backend directory and add your variables:
