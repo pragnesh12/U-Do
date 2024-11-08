@@ -41,36 +41,38 @@ You can check out a live demo [here](#) (add your link) or follow the setup inst
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/U-do---A-advanced-todo-app.git
-   cd U-do---A-advanced-todo-app
+   git clone https://github.com/pragnesh12/U-Do.git
+   cd U-Do
 
 ## For Frontend
-
-1. cd todo-frontend
-2. npm install
-
+ ```bash
+ cd todo-frontend
+ npm install
+```
 ## For Backend
-
-1. cd todo-backend
-2. npm install
+```bash
+ cd todo-backend
+ npm install
+```
 
 ## Environment Variables: Create a .env file in the todo-backend directory and add your variables:
-
-1. DATABASE_URL=your_database_url
-2. ACCESS_TOKEN=your_jwt_secret
-
+```bash
+DATABASE_URL=your_database_url
+ACCESS_TOKEN=your_jwt_secret
+```
 ## Run the Project:
 
 # For Frontend
-
-1. cd todo-frontend
-2. npm run start
-
+```bash
+cd todo-frontend
+npm run start
+```
 # For Backend
+```bash
 
-1. cd todo-backend
-2. npm start
-
+cd todo-backend
+npm start
+```
 
 ---
 
