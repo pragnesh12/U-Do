@@ -56,8 +56,7 @@ You can check out a live demo [here](#) (add your link) or follow the setup inst
 
 ## Environment Variables: Create a .env file in the todo-backend directory and add your variables:
 
-DATABASE_URL=your_database_url
-ACCESS_TOKEN=your_jwt_secret
+put your credentials in schema.prisma file
 
 ## Run the Project:
 
