@@ -42,9 +42,9 @@ const AddTask = () => {
 
   return (
     <>
-      <div className="p-2 ">
-        <div className="w-full relative mt-4 ">
-          <div className="relative md:mx-auto sm:mr-10 ">
+      <div className="p-2">
+        <div className="w-full relative mt-3">
+          <div className="relative md:mx-auto sm:mr-10">
             {/* Left button with SVG icon */}
             <button
               className="absolute left-1 top-1 rounded p-1.5 border border-transparent text-gray-800/60 text-center text-sm text-white transition-all shadow-sm hover:shadow focus:shadow-none active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mt-[-0.25rem] ml-[-0.30rem] "

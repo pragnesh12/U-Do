@@ -75,7 +75,7 @@ const Dashboard: React.FC<SidebarProps> = ({ currentUser }) => {
   return (
     <div className="flex flex-col p-8 dashboard-img text-white h-full mt-6">
       {/* Header Section */}
-      <div className="mb-6 md:mx-auto md:ml-[14rem] sm:ml-[8rem]">
+      <div className="mb-5 md:mx-auto md:ml-[14rem]  sm:ml-[8rem]">
         <h1 className="md:text-3xl text-md font-bold">
           {greeting}, {currentUser?.firstName}
         </h1>

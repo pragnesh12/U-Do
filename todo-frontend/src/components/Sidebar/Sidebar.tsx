@@ -76,7 +76,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
     <>
       {isCollapse ? (
         <div
-          className={`sm:max-w-64 md:w-64 h-screen bg-gray-900/80 text-white p-4 md:text-md  text-[0.90rem]`}
+          className={`sm:w-[50rem] md:w-64 h-screen ${
+            isSmallDevice && "sm:w-full"
+          } bg-gray-900/80 text-white p-4 md:text-md text-[0.90rem]`}
           onMouseLeave={toggleCollapse}
         >
           <div className="flex items-center space-x-2 mb-6 cursor-pointer">
@@ -97,7 +99,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
                 <p className="font-semibold md:text-xl sm:text-sm">
                   {currentUser?.firstName}
                 </p>
-                <p className="text-sm text-gray-400">Free Plan</p>
+                {!isSmallDevice && (
+                  <p className="text-sm text-gray-400">Free Plan</p>
+                )}
               </p>
 
               {!isSmallDevice && (
@@ -123,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
             </div>
           </div>
 
-          <ul className="ml-[-0.80rem] mt-[-0.80rem]">
+          <ul className="ml-[-0.80rem] mt-[-0.80rem] font-semibold">
             <NavLink
               to="/myday"
               className={({ isActive }) =>
@@ -131,10 +135,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
               }
             >
               <li className="flex items-center space-x-2 hover:bg-gray-800/90 p-[0.60rem] hover:rounded-md">
-                <span>🌅</span>
-                <span className="ml-[1rem]">
-                  My day{" "}
-                  <span className="bg-blue-600 text-white px-2 rounded-full text-[1rem] ml-1">
+                <span className="md:text-md">🌅</span>
+                <span className="ml-[1rem] md:text-[1.10rem] text-[11px]">
+                  MyDay{" "}
+                  <span className="bg-blue-600 text-white md:px-2 px-1 rounded-full md:text-[1rem] text-[0.70rem] md:ml-[0.10rem] ml-[0.1rem]">
                     {todoCount.length}
                   </span>
                 </span>
@@ -149,9 +153,11 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
             >
               <li className="flex items-center space-x-2 p-[0.60rem] hover:rounded-md hover:bg-gray-800/90">
                 <span>📅</span>
-                <span className="ml-[1rem]">
-                  Next 7 days{" "}
-                  <span className="text-gray-400 ml-2 text-[1rem]">4</span>
+                <span className="ml-[1rem] md:text-[1.10rem] text-[11px]">
+                  Next 7 days
+                  <span className="text-gray-400 md:px-2 px-1 rounded-full md:text-[1rem] text-[0.70rem] md:ml-[0.10rem] ml-[0.1rem]">
+                    4
+                  </span>
                 </span>
               </li>
             </NavLink>
@@ -164,20 +170,22 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
             >
               <li className="flex items-center space-x-2 p-[0.60rem] hover:rounded-md hover:bg-gray-800/90">
                 <span>📄</span>
-                <span className="ml-[1rem]">
-                  All my tasks{" "}
-                  <span className="text-gray-400 ml-2 md:text-[1rem]">4</span>
+                <span className="ml-[1rem] md:text-[1.10rem] text-[11px]">
+                  All my tasks
+                  <span className="text-gray-400 md:px-2 px-1 rounded-full md:text-[1rem] text-[0.70rem] md:ml-[0.10rem] ml-[0.1rem]">
+                    4
+                  </span>
                 </span>
               </li>
             </NavLink>
           </ul>
 
           {showDropdown && <UserDropdown />}
-          <div className="mt-6">
-            <p className="text-gray-300 font-semibold md:text-xl text-[1rem]">
+          <div className="md:mt-6">
+            <p className="text-gray-300 font-semibold text-[1rem] md:text-[1.50rem]">
               My lists {"📃"}
             </p>
-            <ul className="space-y-2 mt-2 text-gray-300 ml-[-0.50rem] text-md">
+            <ul className="space-y-3 md:mt-2 mt-1 text-gray-300 ml-[-0.50rem] md:text-[1.10rem] text-sm font-semibold">
               <NavLink
                 to="/personal"
                 className={({ isActive }) =>
@@ -187,8 +195,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
                 <li className="flex items-center space-x-2 hover:rounded-md hover:bg-gray-800/90 p-[0.40rem] mb-[-1rem]">
                   <span>📂</span>
                   <span className="">
-                    Personal{" "}
-                    <span className="bg-blue-600 text-white px-2 rounded-full text-[1rem] ml-1">
+                    Personal
+                    <span className="bg-blue-600 text-white md:px-2 px-1 rounded-full md:text-[1rem] text-[0.70rem] md:ml-1 ml-[0.2rem]">
                       3
                     </span>
                   </span>
@@ -208,7 +216,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
             </ul>
           </div>
 
-          <div className="mt-6">
+          <div className="md:mt-6 mt-3">
             <p className="text-gray-300 font-semibold text-xl">Tags </p>
             <ul className="space-y-1 mt-1 text-yellow-400 hover:rounded-md hover:bg-gray-800/90 p-2 ml-[-0.30rem] text-md">
               <li>
@@ -236,6 +244,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
               fill="#000000"
+              onMouseEnter={toggleCollapse}
               onClick={toggleCollapse}
               // onClic={toggleCollapse}
               className="ml-5 mt-7 bg-black p-2 cursor-pointer hover:bg-gray-900/50 rounded-full"

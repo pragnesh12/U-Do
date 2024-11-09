@@ -5,10 +5,14 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TodoServices from "./apiServices/todoServices";
+import UpdateTodoCard from "./components/UpdateTodoCard/UpdateTodoCard";
+import { TodoContext, TodoProvider } from "./store/todoStore";
 
 function App() {
+  const { currentTodoId } = useContext(TodoContext);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -18,6 +22,7 @@ function App() {
         <Route path="/myday" element={<Home />}></Route>
         <Route path="/notfound" element={<NotFound />}></Route>
         <Route path="/verify_email/:token" element={<VerifyEmail />}></Route>
+        <Route path={`/myday/tasks/:id/activity`} element={<UpdateTodoCard />}></Route>
       </Routes>
     </BrowserRouter>
   );

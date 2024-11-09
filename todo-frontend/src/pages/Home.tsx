@@ -58,23 +58,21 @@ const Home = () => {
 
   return (
     <>
-      <TodoProvider>
-        <div className="flex !overflow-y-hidden overflow-x-hidden">
-          {/* Conditionally render Sidebar on small screens */}
-          <div className={`${!isSidebarVisible ? "block" : "hidden"} md:block`}>
-            <Sidebar currentUser={currentUser} />
-          </div>
-
-          {/* Content area */}
-          <div
-            className={`flex-grow ${
-              isSidebarVisible ? "mx-auto" : "ml-0"
-            } md:ml-1 transition-all`}
-          >
-            <Dashboard currentUser={currentUser} />
-          </div>
+      <div className="flex !overflow-y-hidden overflow-x-hidden">
+        {/* Conditionally render Sidebar on small screens */}
+        <div className={`${!isSidebarVisible ? "block" : "hidden"} md:block`}>
+          <Sidebar currentUser={currentUser} />
         </div>
-      </TodoProvider>
+
+        {/* Content area */}
+        <div
+          className={`flex-grow ${
+            isSidebarVisible ? "mx-auto" : "ml-0"
+          } md:ml-1 transition-all`}
+        >
+          <Dashboard currentUser={currentUser} />
+        </div>
+      </div>
     </>
   );
 };

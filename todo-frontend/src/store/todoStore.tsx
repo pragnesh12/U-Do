@@ -22,6 +22,7 @@ interface TodoProviderProps {
 
 export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   const [todo, setTodo] = useState<Todo[]>([]);
+  const [currentTodoId, setCurrentTodoId] = useState<string>("");
 
   useEffect(() => {
     (async () => {
@@ -37,7 +38,9 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <TodoContext.Provider value={{ todo, setTodo }}>
+    <TodoContext.Provider
+      value={{ todo, setTodo, currentTodoId, setCurrentTodoId }}
+    >
       {children}
     </TodoContext.Provider>
   );

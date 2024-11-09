@@ -12,6 +12,6 @@ todoRouter.post("/myday-todo", AuthCheck, insertTodo);
 todoRouter.delete("/delete-todo", AuthCheck, deleteTodo);
 todoRouter.put("/update-todo", AuthCheck, updateTodo);
 todoRouter.get("/fetch-todo", AuthCheck, fetchTodo);
-todoRouter.get("/fetch-todo-by-id", AuthCheck, fetchTodoById);
+todoRouter.get("/myday/tasks", AuthCheck, fetchTodoById);
 
 export default todoRouter;

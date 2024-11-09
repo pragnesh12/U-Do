@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import MoveToListDropdown from "../ListComponents/MoveToListDropdown";
+import TodoServices from "../../apiServices/todoServices";
+import { motion } from "framer-motion";
+import Home from "../../pages/Home";
 
-const UpdateTodoCard = ({ isOpen, onClose, currentTodo }: any) => {
+// Define the shape of currentTodo
+interface Todo {
+  id?: string;
+  title?: string;
+  description?: string;
+  done?: boolean;
+  // add other properties as needed
+}
+
+const UpdateTodoCard = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedList, setSelectedList] = useState("Personal");
+  const [currentTodo, setCurrentTodo] = useState<Todo>({});
+  const navigate = useNavigate();
+
+  let { id } = useParams();
+  console.log("Helo : ", id);
+
+  useEffect(() => {
+    (async () => {
+      const response = await TodoServices.fetchTodoById(id).then((res: any) => {
+        console.log("Hi From up : ", res.Task);
+        setCurrentTodo(res.Task);
+      });
+    })();
+  }, []);
+
   const [title, setTitle] = useState(currentTodo);
   const [description, setDescription] = useState(currentTodo);
-
-  if (!isOpen) return null;
 
   const openDropdown = () => setIsDropdownOpen(true);
   const closeDropdown = () => setIsDropdownOpen(false);
@@ -19,78 +45,140 @@ const UpdateTodoCard = ({ isOpen, onClose, currentTodo }: any) => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-[10rem]">
-        <div className="bg-gray-900 text-gray-200 w-[40rem] h-[30rem] p-5 rounded-lg shadow-lg relative ">
-          <p className="text-blue-400 font-small text-[13px] hover:underline cursor-pointer">
-            My lists {">"} Personal
-          </p>
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-3 text-gray-400 hover:text-white text-2xl"
-          >
-            ❌
-          </button>
-
-          {/* <label htmlFor="title">Title</label> */}
-          <div className="flex mb-4">
-            <br />
-            <input
-              className="text-xl font-semibold bg-gray-900 bg-opacity-50 w-full mr-10 py-2 rounded-md !border-none outline-none"
-              id="title"
-              value={title.title}
-              onChange={(e) => setTitle({ ...title, title: e.target.value })}
-            ></input>
-          </div>
-
-          <div className="flex gap-2 mb-4 cursor-pointer">
-            <span className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-1 rounded-full text-sm">
-              🔔 Remind me
-            </span>
-            <span
-              className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-1 rounded-full text-sm"
-              onClick={openDropdown}
+      <Home />
+      <>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center overflow-y-hidden mt-[-1rem] justify-center z-50 p-[10rem] ">
+          <div className="bg-gray-900 text-gray-200 w-[40rem] h-[30rem] p-5 rounded-lg shadow-lg relative ">
+            <p className="text-blue-400 font-small md:text-[13px] text-[10px] hover:underline cursor-pointer">
+              My lists {">"} Personal
+            </p>
+            <button
+              // onClick={onClose}
+              className="absolute md:top-[2.1rem] top-[4.2rem] md:right-[6rem] right-2 text-gray-400 hover:text-blue-400 md:text-[0.70rem] text-[0.60rem] md:mt-0 sm:mt-2"
             >
-              📁 Personal
-            </span>
-            <span className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-1 rounded-full text-sm">
-              # Tags
-            </span>
-          </div>
+              Mark as complete
+            </button>
+            <button
+              // onClick={()=>navigate()}
+              className="absolute top-[1.68rem] right-[3.2rem] text-gray-400 hover:text-blue-400 md:text-[0.70rem] text-[0.70rem]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  r="9"
+                  fill="transparent"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  transform="matrix(1 0 0 -1 12 12)"
+                ></circle>
+                <circle
+                  r="5"
+                  fill="transparent"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  transform="matrix(1 0 0 -1 12 12)"
+                ></circle>
+                <circle
+                  r="1"
+                  fill="transparent"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  transform="matrix(1 0 0 -1 12 12)"
+                ></circle>
+              </svg>
+            </button>
 
-          <div className="mb-2">
-            <label htmlFor="notes" className="block text-sm font-medium ml-2">
-              Notes
-            </label>
-            <textarea
-              id="notes"
-              placeholder={"Insert your notes here"}
-              className="w-full h-20 bg-gray-900 bg-opacity-50 text-gray-200 !border-none outline-none rounded-md p-2 resize-none"
-              value={description.description}
-              onChange={(e) =>
-                setDescription({ ...description, description: e.target.value })
-              }
-            ></textarea>
-          </div>
+            <button
+              onClick={() => {
+                navigate("/myday");
+              }}
+              className="absolute top-6 right-3 text-gray-400 hover:text-blue-400 text-2xl "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16px"
+                height="16px"
+                className="w-[28px] h-[28px] md:w-[28px] md:h-[28px] mt-1"
+                viewBox="0 0 42 42"
+              >
+                <path
+                  fill="#fa6060"
+                  d="m21.002 26.588l10.357 10.604c1.039 1.072 1.715 1.083 2.773 0l2.078-2.128c1.018-1.042 1.087-1.726 0-2.839L25.245 21L36.211 9.775c1.027-1.055 1.047-1.767 0-2.84l-2.078-2.127c-1.078-1.104-1.744-1.053-2.773 0L21.002 15.412L10.645 4.809c-1.029-1.053-1.695-1.104-2.773 0L5.794 6.936c-1.048 1.073-1.029 1.785 0 2.84L16.759 21L5.794 32.225c-1.087 1.113-1.029 1.797 0 2.839l2.077 2.128c1.049 1.083 1.725 1.072 2.773 0z"
+                />
+              </svg>
+            </button>
 
-          <div className="mb-4">
-            <label className="block  text-sm font-medium ml-2">Subtasks</label>
-            <div className="flex items-center gap-2">
+            {/* <label htmlFor="title">Title</label> */}
+            <div className="flex mb-4">
+              <br />
               <input
-                type="text"
-                placeholder="Add a new subtask"
-                className="flex-1 bg-gray-900 bg-opacity-50 text-gray-200 rounded-md p-2 !border-none outline-none"
-              />
-              <button className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-2 rounded-full text-sm">
-                + Add
-              </button>
+                className="text-xl font-semibold bg-gray-900 bg-opacity-50 w-full mr-10 py-2 rounded-md !border-none outline-none"
+                id="title"
+                value={currentTodo.title}
+                onChange={(e) => setTitle({ ...title, title: e.target.value })}
+              ></input>
+            </div>
+
+            <div className="flex gap-2 mb-4 cursor-pointer">
+              <span className="bg-gray-800 bg-opacity-50 text-gray-300  px-2 py-1 rounded-full md:text-sm text-[10px]">
+                🔔Remind me
+              </span>
+              <span
+                className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-1 rounded-full md:text-sm text-[10px]"
+                onClick={openDropdown}
+              >
+                📁 Personal
+              </span>
+              <span className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-1 rounded-full md:text-sm text-[10px]">
+                # Tags
+              </span>
+            </div>
+
+            <div className="mb-2">
+              <label htmlFor="notes" className="block text-sm font-medium ml-2">
+                Notes
+              </label>
+              <textarea
+                id="notes"
+                placeholder={"Insert your notes here"}
+                className="w-full h-20 bg-gray-900 bg-opacity-50 text-gray-200 !border-none outline-none rounded-md p-2 resize-none"
+                value={currentTodo.description}
+                onChange={(e) =>
+                  setDescription({
+                    ...description,
+                    description: e.target.value,
+                  })
+                }
+              ></textarea>
+            </div>
+
+            <div className="mb-4">
+              <label className="block  text-sm font-medium ml-2">
+                Subtasks
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  placeholder="Add a new subtask"
+                  className="flex-1 bg-gray-900 bg-opacity-50 text-gray-200 rounded-md p-2 !border-none outline-none"
+                />
+                <button className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-2 rounded-full text-sm">
+                  + Add
+                </button>
+              </div>
+            </div>
+
+            <div className="border border-dashed border-gray-600 p-4 text-gray-400 text-center rounded-md cursor-pointer mt-3">
+              Click to add / drop your files here
             </div>
           </div>
-
-          <div className="border border-dashed border-gray-600 p-4 text-gray-400 text-center rounded-md cursor-pointer mt-3">
-            Click to add / drop your files here
-          </div>
         </div>
-      </div>
+      </>
       {isDropdownOpen && (
         <MoveToListDropdown
           isOpen={isDropdownOpen}

@@ -59,3 +59,10 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+.backgroundImg {
+  background-image: url("../public/Img03.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

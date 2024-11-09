@@ -12,19 +12,18 @@ const Signup = () => {
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
-    password: "", 
-    firstName:"",
+    password: "",
+    firstName: "",
     lastName: "",
   });
 
-
-  type RecordType = Record<any,any>;
+  type RecordType = Record<any, any>;
 
   type formErrors = RecordType;
   const [formErrors, setFormErrors] = useState({});
 
-  const validateForm = (values:any) => {
-    const error:Record<any,any> = {};
+  const validateForm = (values: any) => {
+    const error: Record<any, any> = {};
     const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.fname) {
@@ -48,7 +47,7 @@ const Signup = () => {
     return error;
   };
 
-  const handleOnSubmit = (e:any) => {
+  const handleOnSubmit = (e: any) => {
     console.log("Your Data : ", inputs);
     e.preventDefault();
     setFormErrors(validateForm(inputs));
@@ -80,14 +79,14 @@ const Signup = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-gray-100">
+      <div className="flex flex-col h-screen backgroundImg">
         <div className="grid place-items-center mx-2 my-20 sm:my-auto">
           <div
             className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
             px-6 py-10 sm:px-10 sm:py-6 
-            bg-white rounded-lg shadow-md lg:shadow-lg"
+            bg-blue-300/20 rounded-lg shadow-md lg:shadow-lg"
           >
-            <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+            <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-200">
               Signup
             </h2>
 
@@ -98,7 +97,7 @@ const Signup = () => {
             >
               <label
                 htmlFor="username"
-                className="block text-xs font-semibold text-gray-600 uppercase"
+                className="block text-xs font-semibold text-gray-300 uppercase mb-1 ml-[0.10rem]"
               >
                 Username <span className="text-red-500">*</span>
               </label>
@@ -107,10 +106,10 @@ const Signup = () => {
                 type="text"
                 name="username"
                 placeholder="username"
-                className="block w-full py-3 px-1 
+                className="block w-full py-3 px-2
                     text-gray-800 appearance-none 
-                    border-b-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                    border-b-2 border-gray-800/50
+                    focus:text-gray-300 focus:outline-none  focus:border-gray-800/50 bg-gray-800/50 rounded-md"
                 value={inputs.username}
                 onChange={(e) => {
                   setInputs({ ...inputs, username: e.target.value });
@@ -118,10 +117,10 @@ const Signup = () => {
               />
               {/* {!inputs.username && (
                 // <p className="text-red-500">{formErrors.username}</p>
-              )} */}  
+              )} */}
               <label
                 htmlFor="email"
-                className="block text-xs font-semibold text-gray-600 uppercase mt-2"
+                className="block text-xs font-semibold text-gray-300 uppercase mt-2 mb-1 ml-[0.10rem]"
               >
                 E-mail <span className="text-red-500">*</span>
               </label>
@@ -130,10 +129,10 @@ const Signup = () => {
                 type="text"
                 name="email"
                 placeholder="e-mail address"
-                className="block w-full py-3 px-1 
+                className="block w-full py-3 px-2
                     text-gray-800 appearance-none 
-                    border-b-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                    border-gray-800/50
+                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
                 value={inputs.email}
                 onChange={(e) => {
                   setInputs({ ...inputs, email: e.target.value });
@@ -148,7 +147,7 @@ const Signup = () => {
               )} */}
               <label
                 htmlFor="password"
-                className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
+                className="block mt-2 text-xs font-semibold  text-gray-300 mb-1 ml-[0.10rem] uppercase"
               >
                 Password <span className="text-red-500">*</span>
               </label>
@@ -158,10 +157,10 @@ const Signup = () => {
                   type={showPassword ? "text" : "password"} // Toggle between text and password
                   name="password"
                   placeholder="password"
-                  className="block w-full py-3 px-1 
-                    text-gray-800 appearance-none 
-                    border-b-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                  className="block w-full py-3 px-2
+                    text-gray-300 appearance-none 
+                   border-gray-800/50
+                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
                   value={inputs.password}
                   onChange={(e) => {
                     setInputs({ ...inputs, password: e.target.value });
@@ -177,27 +176,26 @@ const Signup = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)} // Toggle the state
-                  className="absolute right-3 top-3 text-gray-600"
+                  className="absolute right-3 top-3 text-gray-400"
                 >
                   {showPassword ? "Hide" : "Show"} {/* Text based on state */}
                 </button>
               </div>
               <label
                 htmlFor="firstname"
-                className="block text-xs font-semibold text-gray-600 uppercase mt-2"
+                className="block text-xs font-semibold mt-2 text-gray-300 uppercase mb-1 ml-[0.10rem]"
               >
-                First Name 
-                
+                First Name
               </label>
               <input
                 id="firstName"
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                className="block w-full py-3 px-1
+                className="block w-full py-3 px-2
                     text-gray-800 appearance-none 
-                    border-b-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                   border-gray-800/50
+                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
                 value={inputs.firstName}
                 onChange={(e) => {
                   setInputs({ ...inputs, firstName: e.target.value });
@@ -208,19 +206,19 @@ const Signup = () => {
               )} */}
               <label
                 htmlFor="lastname"
-                className="block text-xs font-semibold text-gray-600 uppercase mt-2"
+                className="block text-xs font-semibold  text-gray-300 uppercase mb-1 ml-[0.10rem] mt-2 "
               >
-                Last name 
+                Last name
               </label>
               <input
                 id="lastName"
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                className="block w-full py-3 px-1 
+                className="block w-full py-3 px-2 
                     text-gray-800 appearance-none 
-                    border-b-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                    border-gray-800/50
+                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
                 value={inputs.lastName}
                 onChange={(e) => {
                   setInputs({ ...inputs, lastName: e.target.value });

@@ -52,4 +52,24 @@ TodoServices.fetchTodo = async function (): Promise<any> {
     });
 };
 
+// FOR FetchTodo END POINT
+TodoServices.fetchTodoById = async function (id: any): Promise<any> {
+  const token = localStorage.getItem("auth");
+
+  return fetch(`/myday/tasks?id=${id}`, {
+    method: "GET",
+    headers: {
+      "public-request": "true",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response: any) => {
+      return response;
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
+      throw error;
+    });
+};
+
 export default TodoServices;
