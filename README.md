@@ -1,116 +1,119 @@
-# My Project Name
+# U-Do - Advanced Todo App
 
-This is a full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js), with additional technologies such as Tailwind CSS and Socket.IO. The project aims to provide [describe the functionality or purpose of your project here].
+U-Do is an advanced Todo application built with the latest technologies like the MERN stack, Prisma, and PostgreSQL. This project is designed to provide a modern and efficient way to manage tasks and organize your day. The app features a seamless user interface and powerful backend functionalities to make your task management easy.
 
-## Table of Contents
+## Technologies Used
 
-- [Installation](#installation)
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [API Endpoints](#api-endpoints)
-- [Folder Structure](#folder-structure)
-- [How to Run](#how-to-run)
-- [Contributing](#contributing)
-- [License](#license)
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **State Management**: Context API
 
-## Installation
+## Project Structure
 
-### 1. Clone the Repository
+The project is divided into two main directories:
 
-First, clone this repository to your local machine.
+- **`todo-frontend`**: The frontend part of the application.
+- **`todo-backend`**: The backend part of the application.
+
+## Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [npm](https://www.npmjs.com/)
+- PostgreSQL
+- Prisma CLI
+
+### Backend Setup
+
+1. Clone the repository:
+
+   ````bash
+   git clone https://github.com/yourusername/U-Do.git
+   cd U-Do/todo-backend
+   Install the required dependencies:
+
+   ```bash
+   npm install
+   Set up your PostgreSQL database and update the DATABASE_URL in the .env file with your PostgreSQL connection string.
+   ````
+
+   Run Prisma migrations:
+
+   ```bash
+   npx prisma migrate dev
+   ```
+
+   Start the backend server:
+
+   ```bash
+   npm start
+   The backend will now be running at http://localhost:1156.
+   ```
+
+   Frontend Setup
+   In a new terminal, navigate to the todo-frontend folder:
+
+   ```bash
+   cd U-Do/todo-frontend
+   Install the frontend dependencies:
+   ```
+
+   ```bash
+   npm install
+   Start the frontend server:
+   ```
 
 ```bash
-git clone https://github.com/your-username/your-project-name.git
-2. Install Dependencies
-Install the dependencies for both the client-side and server-side.
+npm run start
+```
 
-Client-side (React)
-bash
-Copy code
-cd client
-npm install
-Server-side (Node.js / Express)
-bash
-Copy code
-cd server
-npm install
-Technologies Used
-React: Frontend framework to build the user interface.
-Node.js: JavaScript runtime to run the server.
-Express.js: Web framework for building the API.
-MongoDB: NoSQL database used for storing data.
-Tailwind CSS: Utility-first CSS framework used for styling.
-Socket.IO: Real-time communication for the private chat feature.
-Prisma: ORM used for database migrations and model management.
-Sequelize: ORM for managing SQL databases and migrations.
-JWT: JSON Web Tokens for authentication.
-Features
-User Authentication: Sign-up, login, and password reset functionality.
-Real-Time Private Chat: Using Socket.IO to implement real-time messaging.
-User Profile Settings: Users can update their profiles, including uploading images.
-Todo List: Users can create, update, and delete tasks in a to-do list.
-Responsive Design: The app is fully responsive, ensuring good performance across different screen sizes.
-API Endpoints
-POST /api/auth/signup: Register a new user.
-POST /api/auth/login: Login a user.
-POST /api/auth/forgot-password: Initiate password reset.
-GET /api/todos: Get a list of all todos for the logged-in user.
-POST /api/todos: Create a new todo.
-PUT /api/todos/
-: Update a specific todo.
-DELETE /api/todos/
-: Delete a specific todo.
-Folder Structure
-bash
-Copy code
-client/
-  ├── src/
-  │   ├── components/
-  │   ├── context/
-  │   ├── hooks/
-  │   ├── pages/
-  │   └── App.js
-  ├── public/
-  └── package.json
+The frontend will now be running at http://localhost:3000.
 
-server/
-  ├── controllers/
-  ├── models/
-  ├── routes/
-  ├── config/
-  ├── middlewares/
-  ├── server.js
-  └── package.json
-client/: Contains the React frontend code.
-server/: Contains the Express backend code, including controllers, routes, and models.
-How to Run
-1. Start the Server
-bash
-Copy code
-cd server
-npm start
-This will start the backend server, usually on http://localhost:5000.
-
-2. Start the Client
-bash
-Copy code
-cd client
-npm start
-This will start the React development server on http://localhost:3000.
-
-3. Optional: Running the Full Stack Locally
-If you're running both the client and server locally, ensure both are running at the same time (one on port 3000 and the other on port 5000).
-
-Contributing
-Contributions are welcome! To contribute to this project, please fork this repository, create a new branch, and submit a pull request.
+How to Contribute
+We welcome contributions from the community! To contribute to the project:
 
 Fork the repository.
-Create your feature branch: git checkout -b feature/my-new-feature.
-Commit your changes: git commit -m 'Add new feature'.
-Push to your branch: git push origin feature/my-new-feature.
-Open a pull request.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-Feel free to replace sections like "My Project Name," "Features," and any other placeholder text to match the specifics of your project. Let me know if you'd like further adjustments or additional sections!
+Clone your fork:
+
+```bash
+git clone https://github.com/yourusername/U-Do.git
 ```
+
+Create a new branch for your feature or bug fix:
+
+```bash
+git checkout -b my-new-feature
+```
+
+Make your changes and commit them:
+
+```bash
+git commit -am 'Add new feature'
+```
+
+Push your changes to your fork:
+
+```bash
+git push origin my-new-feature
+```
+
+Open a pull request to the main branch of the original repository.
+
+License
+This project is open-source and available under the MIT License.
+
+Contact
+If you have any questions or suggestions, feel free to reach out to me at [heypragnesh@gmail.com].
+
+Thank you for checking out U-Do! We hope it helps you manage your tasks more effectively.
+
+vbnet
+Copy code
+
+This `README.md` file gives clear instructions on how to set up both the frontend and backend, how to contribute to the project, and includes other useful information like the technologies used and project structure. You can customize the contact and repository links as needed.
