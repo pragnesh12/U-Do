@@ -27,6 +27,13 @@ export const fetchTodo: RequestHandler = async (
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        SubTodo: {
+          orderBy: {
+            subTitle: "desc", // Order SubTodo items by createdAt in descending order
+          },
+        },
+      },
     });
 
     console.log("Successfully Fetched A Todo");

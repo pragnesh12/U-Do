@@ -37,11 +37,22 @@ model Todo {
   createdAt   DateTime      @default(now()) // Automatically set to current timestamp on creation
   updatedAt   DateTime      @updatedAt // Automatically set to current timestamp on update
   ListAndTags ListAndTags[]
+  SubTodo     SubTodo[]
 }
 
 model ListAndTags {
   id        Int      @id @default(autoincrement())
   todoId    String
+  todo      Todo     @relation(fields: [todoId], references: [id])
+  createdAt DateTime @default(now()) // Automatically set to current timestamp on creation
+  updatedAt DateTime @updatedAt // Automatically set to current timestamp on update
+}
+
+model SubTodo {
+  id        String   @id @default(uuid())
+  subTitle  String
+  todoId    String
+  subDone   Boolean  @default(false)
   todo      Todo     @relation(fields: [todoId], references: [id])
   createdAt DateTime @default(now()) // Automatically set to current timestamp on creation
   updatedAt DateTime @updatedAt // Automatically set to current timestamp on update

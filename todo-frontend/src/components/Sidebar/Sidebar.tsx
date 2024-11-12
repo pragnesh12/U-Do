@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
   const [isCollapse, setIsCollapse] = useState(true);
   const [isShowBtn, setIsShowBtn] = useState(true);
   const [isSmallDevice, setIsSmallDevice] = useState(false);
-  const [isPined, setIsPined] = useState(false);
+  const [isPined, setIsPined] = useState(true);
 
   const todo = useContext(TodoContext);
   const toggleDropdown = () => {
@@ -30,7 +30,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
   };
 
   const toggleCollapse = () => {
-    if (!isPined) setIsCollapse((prev: any) => !prev);
+    if (!isPined) {
+      setIsCollapse((prev: any) => !prev);
+    }
     //
   };
 
@@ -56,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
     })();
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setIsCollapse((prev: any) => !prev);
+        setIsCollapse(true);
         setIsSmallDevice(true);
         setIsShowBtn((prev: any) => !prev); // Show button on small screens
       } else {
@@ -74,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
 
   return (
     <>
-      {isCollapse ? (
+      {!isCollapse ? (
         <div
           className={`sm:w-[50rem] md:w-64 h-screen ${
             isSmallDevice && "sm:w-full"

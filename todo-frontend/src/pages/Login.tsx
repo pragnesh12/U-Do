@@ -66,16 +66,16 @@ const Login = () => {
           <div
             className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
             px-6 py-10 sm:px-10 sm:py-6 
-            bg-blue-300/20 rounded-lg shadow-md lg:shadow-lg"
+            bg-gray-200 rounded-lg shadow-md lg:shadow-lg"
           >
-            <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-200">
+            <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
               Login
             </h2>
 
             <form className="mt-10" onSubmit={handleOnSubmit}>
               <label
                 htmlFor="email"
-                className="block text-xs font-semibold text-gray-300 uppercase mb-1 ml-[0.10rem] mt-2"
+                className="block text-xs font-semibold text-gray-800 uppercase mb-1 ml-[0.10rem] mt-2"
               >
                 E-mail <span className="text-red-500">*</span>
               </label>
@@ -86,8 +86,8 @@ const Login = () => {
                 placeholder="e-mail address"
                 className="block w-full py-3 px-2 mt-2 
                     text-gray-800 appearance-none 
-                   border-gray-800/50
-                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
+                    border-b-2 border-gray-800/50
+                    focus:text-gray-800 focus:outline-none  focus:border-gray-800/50 bg-gray-100 rounded-md"
                 value={inputs.email}
                 onChange={(e) => {
                   setInputs({ ...inputs, email: e.target.value });
@@ -102,7 +102,7 @@ const Login = () => {
               )} */}
               <label
                 htmlFor="password"
-                className="block mt-2 text-xs font-semibold  text-gray-300 mb-1 ml-[0.10rem] uppercase"
+                className="block mt-2 text-xs font-semibold  text-gray-800 mb-1 ml-[0.10rem] uppercase"
               >
                 Password <span className="text-red-500">*</span>
               </label>
@@ -114,8 +114,8 @@ const Login = () => {
                   placeholder="password"
                   className="block w-full py-3 px-2 mt-2 
                     text-gray-800 appearance-none 
-                   border-gray-800/50
-                    focus:text-gray-300 focus:outline-none focus:border-gray-800/50 bg-gray-800/50 rounded-md"
+                    border-b-2 border-gray-800/50
+                    focus:text-gray-800 focus:outline-none  focus:border-gray-800/50 bg-gray-100 rounded-md"
                   value={inputs.password}
                   onChange={(e) => {
                     setInputs({ ...inputs, password: e.target.value });
@@ -145,7 +145,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className={`w-full py-3 mt-10 bg-blue-500 rounded-sm
+                className={`w-full py-3 mt-10 bg-blue-500 rounded-md
                   font-medium text-white uppercase
                   focus:outline-none hover:bg-blue-400 hover:shadow-none ${
                     btn && "cursor-not-allowed"
@@ -157,18 +157,18 @@ const Login = () => {
               <div className="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center ">
                 <NavLink
                   to="/signup"
-                  className="flex-2 underline hover:text-blue-400 hover:underline text-gray-300"
+                  className="flex-2 underline hover:text-blue-400 hover:underline text-gray-800"
                 >
                   Create an Account
                 </NavLink>
 
-                <p className="flex-1 text-gray-100 text-md mx-4 my-1 sm:my-auto">
+                <p className="flex-1 text-gray-500 text-md mx-4 my-1 sm:my-auto">
                   or
                 </p>
 
                 <NavLink
                   to="/forget-password"
-                  className="flex-2 underline hover:text-blue-400 hover:underline text-gray-300"
+                  className="flex-2 underline hover:text-blue-400 hover:underline text-gray-800"
                 >
                   Forgot password?
                 </NavLink>

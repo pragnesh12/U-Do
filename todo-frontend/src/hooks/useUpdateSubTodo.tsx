@@ -3,30 +3,29 @@ import TodoServices from "../apiServices/todoServices";
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const useUpdateTodo = () => {
+const useUpdateSubTodo = () => {
   const [loading, setLoading] = useState(false);
 
-  const updateTodo = async (id: any, data: any) => {
-    console.log("-----> ", data);
+  const updateSubTodo = async (id: any, data: any) => {
     try {
       setLoading(true);
-      await TodoServices.updateTodo(id, data).then((res: any) => {
+      await TodoServices.updateSubTodo(id, data).then((res: any) => {
         if (res.success == true) {
-          console.log("resp from useUpdateTodo  : ", res);
-          toast.success("Todo Updated Successfully!");
+          console.log("resp from useUpdateSubTodo  : ", res);
+          toast.success("SubTodo Updated Successfully!");
         } else {
           toast.error(res.message);
         }
       });
     } catch (err: any) {
       setLoading(false);
-      console.log("Error in useUpdateTodo Hook : ", err);
+      console.log("Error in useUpdateSubTodo Hook : ", err);
       toast.error(err?.message);
     } finally {
       setLoading(false);
     }
   };
-  return { loading, updateTodo };
+  return { loading, updateSubTodo };
 };
 
-export default useUpdateTodo;
+export default useUpdateSubTodo;

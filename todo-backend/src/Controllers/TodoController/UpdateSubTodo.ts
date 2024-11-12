@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
-export const updateTodo: RequestHandler = async (
+export const updateSubTodo: RequestHandler = async (
   req: any,
   res: any,
   next
@@ -14,33 +14,36 @@ export const updateTodo: RequestHandler = async (
   const id: any = req.query.id;
 
   try {
-    if (!id) {
+    if (id && !data.id) {
       return res.status(StatusCode.BadRequest).json({
         success: false,
         message: "Please! Provide Id For Updating The Task",
       });
     }
 
-    if (id) {
-      // Update Todo
-      const todo = await prisma.todo.update({
+    // Perform the upsert logic for SubTodos manually based on subTitle
+    // 1. Update existing SubTodos if provided
+
+    // 2. Create new SubTodos if provided
+
+    // 3. For uniquly identify each subTask
+
+    if (data.id) {
+      console.log("sub todo id : ", data.id);
+      // Update SubTodo
+      const subtodo = await prisma.subTodo.update({
         where: {
-          id: id, // ID of the Todo to update
+          id: data.id, // ID of the Todo to update
         },
         data: {
-          title: data.title,
-          done: data.done,
-          description: data.description,
-        },
-        include: {
-          SubTodo: true, // Include SubTodos in the response
+          subTitle: data.subTitle,
+          subDone: data.subDone,
         },
       });
-
       return res.status(StatusCode.Accepted).json({
         success: true,
-        message: "Todo Updated Successfully",
-        Task: todo,
+        message: "SubTodo Updated Successfully",
+        subtodo: subtodo,
       });
     }
   } catch (error) {

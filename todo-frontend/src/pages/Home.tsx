@@ -17,6 +17,7 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useState<Props | undefined>(undefined);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true); // State for sidebar visibility
   const navigate = useNavigate();
+  const [sidebarCollapsed, setSideBarCallapsed] = useState(false);
 
   useEffect(() => {
     // Check for the auth token and user info when the component mounts
@@ -54,14 +55,16 @@ const Home = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [navigate]);
+  }, [setIsSidebarVisible]);
 
   return (
     <>
       <div className="flex !overflow-y-hidden overflow-x-hidden">
         {/* Conditionally render Sidebar on small screens */}
         <div className={`${!isSidebarVisible ? "block" : "hidden"} md:block`}>
-          <Sidebar currentUser={currentUser} />
+          <Sidebar
+            currentUser={currentUser}
+          />
         </div>
 
         {/* Content area */}

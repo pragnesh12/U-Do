@@ -4,6 +4,8 @@ import MoveToListDropdown from "../ListComponents/MoveToListDropdown";
 import TodoServices from "../../apiServices/todoServices";
 import { motion } from "framer-motion";
 import Home from "../../pages/Home";
+import SubTask from "./SubTodo";
+import useUpdateTodo from "../../hooks/useUpdateTodo";
 
 // Define the shape of currentTodo
 interface Todo {
@@ -16,12 +18,15 @@ interface Todo {
 
 const UpdateTodoCard = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [show, setShow] = useState({
+    showForTitle: false,
+    showForDesc: false,
+  });
   const [selectedList, setSelectedList] = useState("Personal");
   const [currentTodo, setCurrentTodo] = useState<Todo>({});
   const navigate = useNavigate();
 
   let { id } = useParams();
-  console.log("Helo : ", id);
 
   useEffect(() => {
     (async () => {
@@ -32,8 +37,10 @@ const UpdateTodoCard = () => {
     })();
   }, []);
 
-  const [title, setTitle] = useState(currentTodo);
-  const [description, setDescription] = useState(currentTodo);
+  const [inputs, setInputs] = useState({
+    title: "",
+    description: "",
+  });
 
   const openDropdown = () => setIsDropdownOpen(true);
   const closeDropdown = () => setIsDropdownOpen(false);
@@ -43,12 +50,29 @@ const UpdateTodoCard = () => {
     closeDropdown();
   };
 
+  // Set the type of subtasks as string[]
+  const [subtasks, setSubtasks] = useState<string[]>([]);
+  const [newSubtask, setNewSubtask] = useState("");
+
+  const addSubtask = () => {
+    if (newSubtask.trim()) {
+      setSubtasks((prev) => [...prev, newSubtask]);
+      setNewSubtask(""); // Clear the input after adding
+    }
+  };
+
+  const { loading, updateTodo } = useUpdateTodo();
+
+  const handleOnChange = async (data: any) => {
+    await updateTodo(id, data);
+  };
+
   return (
     <>
       <Home />
       <>
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center overflow-y-hidden mt-[-1rem] justify-center z-50 p-[10rem] ">
-          <div className="bg-gray-900 text-gray-200 w-[40rem] h-[30rem] p-5 rounded-lg shadow-lg relative ">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center  mt-[-1rem] justify-center z-50 p-[10rem] ">
+          <div className="bg-gray-900 text-gray-200 w-[40rem] h-[30rem] p-5 rounded-lg shadow-lg relative update-todo">
             <p className="text-blue-400 font-small md:text-[13px] text-[10px] hover:underline cursor-pointer">
               My lists {">"} Personal
             </p>
@@ -115,13 +139,16 @@ const UpdateTodoCard = () => {
 
             {/* <label htmlFor="title">Title</label> */}
             <div className="flex mb-4">
-              <br />
               <input
                 className="text-xl font-semibold bg-gray-900 bg-opacity-50 w-full mr-10 py-2 rounded-md !border-none outline-none"
                 id="title"
-                value={currentTodo.title}
-                onChange={(e) => setTitle({ ...title, title: e.target.value })}
-              ></input>
+                value={!show.showForTitle ? currentTodo.title : inputs.title} // bind to title state
+                onChange={(e) => {
+                  setInputs({ ...inputs, title: e.target.value });
+                  setShow({ ...show, showForTitle: true });
+                  handleOnChange({ title: e.target.value }); // additional logic on change
+                }}
+              />
             </div>
 
             <div className="flex gap-2 mb-4 cursor-pointer">
@@ -147,35 +174,20 @@ const UpdateTodoCard = () => {
                 id="notes"
                 placeholder={"Insert your notes here"}
                 className="w-full h-20 bg-gray-900 bg-opacity-50 text-gray-200 !border-none outline-none rounded-md p-2 resize-none"
-                value={currentTodo.description}
-                onChange={(e) =>
-                  setDescription({
-                    ...description,
-                    description: e.target.value,
-                  })
-                }
+                value={
+                  !show.showForDesc
+                    ? currentTodo.description
+                    : inputs.description
+                } // bind to title state
+                onChange={(e) => {
+                  setInputs({ ...inputs, description: e.target.value });
+                  setShow({ ...show, showForDesc: true });
+                  handleOnChange({ description: e.target.value }); // additional logic on change
+                }}
               ></textarea>
             </div>
 
-            <div className="mb-4">
-              <label className="block  text-sm font-medium ml-2">
-                Subtasks
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  placeholder="Add a new subtask"
-                  className="flex-1 bg-gray-900 bg-opacity-50 text-gray-200 rounded-md p-2 !border-none outline-none"
-                />
-                <button className="bg-gray-800 bg-opacity-50 text-gray-300 px-3 py-2 rounded-full text-sm">
-                  + Add
-                </button>
-              </div>
-            </div>
-
-            <div className="border border-dashed border-gray-600 p-4 text-gray-400 text-center rounded-md cursor-pointer mt-3">
-              Click to add / drop your files here
-            </div>
+            <SubTask />
           </div>
         </div>
       </>

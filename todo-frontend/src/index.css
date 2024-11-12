@@ -17,8 +17,16 @@ body {
     overflow-y: auto;
   }
 
-  /* Custom scrollbar styles */
+  .update-todo {
+    height: 70vh; /* Responsive height for tablets and small devices */
+    overflow-y: auto;
+  }
+
   .your-container::-webkit-scrollbar {
+    width: 5px; /* Adjust width */
+  }
+
+  .update-todo::-webkit-scrollbar {
     width: 5px; /* Adjust width */
   }
 
@@ -28,12 +36,22 @@ body {
     border-radius: 2px;
   }
 
+  .update-todo::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
   .your-container::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
   }
+  .update-todo::-webkit-scrollbar-thumb {
+    background: rgba(133, 136, 195, 0.2);
+    border-radius: 4px;
+  }
 
-  .your-container::-webkit-scrollbar-thumb:hover {
+  .your-container::-webkit-scrollbar-thumb:hover,
+  .update-todo::-webkit-scrollbar-thumb:hover {
     background-color: #357abd;
   }
 }
@@ -41,7 +59,10 @@ body {
 @media (min-width: 768px) {
   /* For medium devices (larger tablets, small laptops) */
   .your-container {
-    height: 370px; /*Increase height for larger screens */
+    height: 370px; /* Increase height for larger screens */
+  }
+  .update-todo {
+    height: 60vh; /* Adjust height for larger tablets */
   }
 }
 
@@ -50,6 +71,12 @@ body {
   .your-container {
     height: 400px; /* Smaller height on mobile screens */
     overflow-y: scroll; /* Ensure scrolling works on mobile */
+  }
+
+  .update-todo {
+    height: 50vh; /* Take up most of the viewport height on phones */
+    overflow-y: scroll;
+    min-width: 20rem; /* Adjust to a suitable width for better readability */
   }
 }
 
