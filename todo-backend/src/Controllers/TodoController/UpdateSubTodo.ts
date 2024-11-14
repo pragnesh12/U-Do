@@ -14,7 +14,7 @@ export const updateSubTodo: RequestHandler = async (
   const id: any = req.query.id;
 
   try {
-    if (id && !data.id) {
+    if (!id) {
       return res.status(StatusCode.BadRequest).json({
         success: false,
         message: "Please! Provide Id For Updating The Task",
@@ -28,12 +28,12 @@ export const updateSubTodo: RequestHandler = async (
 
     // 3. For uniquly identify each subTask
 
-    if (data.id) {
+    if (id) {
       console.log("sub todo id : ", data.id);
       // Update SubTodo
       const subtodo = await prisma.subTodo.update({
         where: {
-          id: data.id, // ID of the Todo to update
+          id: id, // ID of the Todo to update
         },
         data: {
           subTitle: data.subTitle,

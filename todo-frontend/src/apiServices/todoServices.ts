@@ -34,7 +34,6 @@ TodoServices.insertSubTodo = function (data: any): Promise<any> {
 
 // FOR UpdateTodo END POINT
 TodoServices.updateTodo = function (id: any, data: any): any {
-  console.log("------------------->", data);
   const token = localStorage.getItem("auth");
   return fetch({
     url: `/update-todo?id=${id}`,
@@ -101,6 +100,32 @@ TodoServices.fetchTodoById = async function (id: any): Promise<any> {
       console.error("Fetch error:", error);
       throw error;
     });
+};
+
+// FOR deleteTodo END POINT
+TodoServices.deleteTodo = function (id: any): any {
+  const token = localStorage.getItem("auth");
+  return fetch({
+    url: `/delete-todo?id=${id}`,
+    method: "delete",
+    headers: {
+      "public-request": "true",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// FOR deleteSubTodo END POINT
+TodoServices.deleteSubTodo = function (id: any): any {
+  const token = localStorage.getItem("auth");
+  return fetch({
+    url: `/delete-subtodo?id=${id}`,
+    method: "delete",
+    headers: {
+      "public-request": "true",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export default TodoServices;

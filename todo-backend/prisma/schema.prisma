@@ -31,11 +31,11 @@ model Todo {
   id          String        @id @default(uuid())
   title       String
   done        Boolean       @default(false)
-  description String? //Optional
+  description String?
   userId      Int
   user        User          @relation(fields: [userId], references: [id])
-  createdAt   DateTime      @default(now()) // Automatically set to current timestamp on creation
-  updatedAt   DateTime      @updatedAt // Automatically set to current timestamp on update
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   ListAndTags ListAndTags[]
   SubTodo     SubTodo[]
 }
@@ -53,7 +53,7 @@ model SubTodo {
   subTitle  String
   todoId    String
   subDone   Boolean  @default(false)
-  todo      Todo     @relation(fields: [todoId], references: [id])
-  createdAt DateTime @default(now()) // Automatically set to current timestamp on creation
-  updatedAt DateTime @updatedAt // Automatically set to current timestamp on update
+  todo      Todo     @relation(fields: [todoId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

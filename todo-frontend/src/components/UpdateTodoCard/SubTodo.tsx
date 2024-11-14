@@ -2,14 +2,17 @@ import { useContext, useState, useEffect } from "react";
 import { TodoContext } from "../../store/todoStore";
 import { useParams } from "react-router-dom";
 import useInsertSubTodo from "../../hooks/userInsertSubTodo";
+import SubDescription from "./SubDescription";
 
 const SubTodo = () => {
   const [subtasks, setSubtasks] = useState<{
     subTitle: string;
     todoId: string;
+    subDone: boolean;
   }>({
     subTitle: "",
     todoId: "",
+    subDone: false,
   });
   const [subTodo, setSubTodo] = useState<any[]>([]); // State to hold subTodos for real-time updates
   const [newSubtask, setNewSubtask] = useState("");
@@ -42,7 +45,7 @@ const SubTodo = () => {
 
       if (response && response.SubTask) {
         setSubTodo((prevSubTodos) => [...prevSubTodos, response.SubTask]);
-        setSubtasks({ subTitle: "", todoId: id || "" });
+        setSubtasks({ subTitle: "", todoId: id || "", subDone: false });
       } else {
         console.error("SubTask not found in response:", response);
       }
@@ -52,10 +55,15 @@ const SubTodo = () => {
   };
 
   const toggleCheck = (id: string) => {
-    setCheckedStates((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
+    // Toggle checked state
+    setCheckedStates((prevState) => {
+      const updatedCheckedStates = {
+        ...prevState,
+        [id]: !prevState[id],
+      };
+
+      return updatedCheckedStates;
+    });
   };
 
   return (
@@ -86,69 +94,24 @@ const SubTodo = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            {subTodo.map((subtask: any) => (
-              <div
-                key={subtask.id}
-                className={`flex items-center gap-2 ${
-                  checkedStates[subtask.id]
-                    ? " bg-gray-700/10 "
-                    : " bg-gray-700/40 bg-opacity-50"
-                } text-gray-200 rounded-md hover:border p-2 hover: border-blue-400`}
-              >
-                <div className="rounded-full md:p-[0.15rem] items-center">
-                  {checkedStates[subtask.id] ? (
-                    <div
-                      className={`${
-                        checkedStates[subtask.id]
-                          ? "bg-blue-500/55"
-                          : "bg-blue-500"
-                      } rounded-full md:p-[0.15rem] md:mt-[-0.15rem] mt-[0.10rem]`}
-                    >
-                      <svg
-                        className="w-[1rem] h-[1rem] md:w-[0.80rem] md:h-[0.80rem] lg:w-[0.80rem] lg:h-[0.80rem]"
-                        viewBox="0 0 14 12"
-                        aria-hidden="true"
-                        onClick={() => toggleCheck(subtask.id)}
-                      >
-                        <path
-                          fill="currentColor"
-                          fillRule="evenodd"
-                          stroke="currentColor"
-                          d="M4.959 9.263l6.792-8.015a.71.71 0 0 1 .995-.082c.3.249.34.69.09.984l-7.29 8.602a.706.706 0 0 1-.708.228.706.706 0 0 1-.483-.248L1.165 6.97a.694.694 0 0 1 .09-.987.712.712 0 0 1 .996.085l2.708 3.195z"
-                        />
-                      </svg>
-                    </div>
-                  ) : (
-                    !checkedStates[subtask.id] && (
-                      <svg
-                        className="w-[1.20rem] h-[1.20rem] md:w-[1.30rem] md:h-[1.30rem] lg:w-[1.30rem] lg:h-[1.30rem] mt-[-0.10rem]"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        onClick={() => toggleCheck(subtask.id)}
-                      >
-                        <circle
-                          cx="12"
-                          cy="14"
-                          r="9"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                      </svg>
-                    )
-                  )}
-                </div>
-                <span
-                  className={`text-md ${
-                    checkedStates[subtask.id]
-                      ? "line-through text-gray-300/55"
-                      : "text-white"
-                  }`}
-                >
-                  {subtask.subTitle}
-                </span>
-              </div>
-            ))}
+            {subTodo
+              .sort((a: any, b: any) => {
+                // Ensure completed tasks are at the end
+                if (checkedStates[a.id] && !checkedStates[b.id]) {
+                  return 1; // a is completed, so it moves to the end
+                }
+                if (!checkedStates[a.id] && checkedStates[b.id]) {
+                  return -1; // b is completed, so it moves to the end
+                }
+                return 0; // Keep the order if both are either checked or unchecked
+              })
+              .map((subtask: any) => (
+                <SubDescription
+                  id={subtask.id}
+                  subTitle={subtask.subTitle}
+                  subDone={subtask.subDone}
+                />
+              ))}
           </div>
         </div>
       </div>
